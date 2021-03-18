@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Updated News{% endblock title %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+
+    <div class="container my-3">
+
+        <div class="col p-4 d-flex flex-column position-static">
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{post.title}}</h2>
+                <p class="blog-post-meta">{{post.timeStamp}} by <a href="/Home/about/">{{post.author}}</a></p>
+
+                <p>{{post.content}}</p>
+                <hr>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+                     <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="500" height="500"
+                                aria-label="Placeholder: Thumbnail"/>
+
+                <div><p>{{ post.caption }}</div>
+            </div>
+
+      </div>
+    </div>
+{% endblock %}

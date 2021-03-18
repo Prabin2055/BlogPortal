@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %} Home{% endblock title %}
+{% block Homeactive %}active{% endblock Homeactive %}
+{% block content %}
+<div class="container">
+<div class="jumbotron my-3">
+  <h1 class="display-4">Welcome to Our BlogPortal!</h1>
+  <p class="lead">News is information about current events. This may be provided through many different media: word of mouth, printing, postal systems, broadcasting, electronic communication,
+      or through the testimony of observers and witnesses to events.Common topics for news reports include war, government, politics, education, health,
+      the environment, economy, business, fashion, and entertainment, as well as athletic events, quirky or unusual events. Government proclamations, concerning royal ceremonies, laws, taxes, public health, and criminals, have been dubbed news since ancient times. Technological and social developments,
+      often driven by government communication and espionage networks, have increased the speed with which news can spread, as well as influenced its content. The genre of news as we know it today is closely associated with the newspaper.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to Blog</a>
+  </div>
+</div>
+
+    <div class="row">
+		<!-- filter -->
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+				<a href="/Home" class="list-group-item list-group-item-action">All News</a>
+				{% for category in categories %}
+				<a href="/Home/?category={{category.id}}"
+					class="list-group-item list-group-item-action">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+{#        <div class="container">#}
+        <div id='posts' class="col-lg-9 mx-auto">
+			<div class="row mx-auto">
+            <h2>Updated News</h2>
+            {% for post in posts %}
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
+                    <h3 class="mb-0"><a href="/blog/{{post.slug}}">{{ post.title}}</a></h3>
+                    <div class="mb-1 text-muted">{{ post.timeStamp }}</div>
+                    <p class="card-text mb-auto">{{ post.content|safe|truncatechars:500 }}</p>
+                    <div class="my-2">
+                        <a href="/Home/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+                    </div>
+
+                </div>
+                 <div class="col-auto d-none d-lg-block">
+                     <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="200" height="250"
+                                aria-label="Placeholder: Thumbnail"/>
+                 </div>
+            </div>
+                `{% endfor %}
+            </div>
+        </div>
+    </div>
+ {% endblock %}
